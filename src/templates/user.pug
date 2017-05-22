@@ -1,0 +1,103 @@
+.row
+  .col-lg-12
+    h1.page-header User
+      small   View your account
+    ol.breadcrumb
+      li
+        a(href='') Home
+      li.active user
+.row
+  .col-md-4.txt-hide
+    .row
+      .col-md-4
+      .col-md-4
+        a.thumbnail(href="", width="150px")
+          img(src="images/icons/favicon.png")
+    .row.text-center
+      p First Name: {{first_name}}
+      p Last Name: {{last_name}}
+      p Email: {{email}}
+  .col-md-8
+    button.btn.btn-custom.btn-sm.pull-right(ng-show="isShowbutton")
+      span.glyphicon.glyphicon-plus   Add New Flap
+    uib-tabset(active="active")
+      uib-tab(index="0",heading="Cat Flap",ng-click="showButton()")
+        pre
+          table.table.table-hover.table-striped
+            thead
+              tr
+                th Flap
+                th ID
+                th Power State
+                th Permitted Cats
+                th Manage
+                th Swift
+                th Delete
+            tbody
+              tr(ng-repeat="x in flaps")
+                td {{x.name}}
+                td {{x.id}}
+                td {{x.power}}
+                td {{x.permittedCats}}
+                td
+                  a.btn.btn-custom.btn-xs(href='/#!/flap')
+                    span.glyphicon.glyphicon-edit  Edit
+                td
+                  button.btn.btn-custom.btn-xs(ng-click="flapOff()", ng-show="isOn")
+                    span.glyphicon.glyphicon-off
+                  button.btn.btn-custom-danger.btn-xs(ng-click="flapOn()", ng-show="isOff")
+                    span.glyphicon.glyphicon-off
+                td
+                  button.btn.btn-xs.btn-custom(rid="{{x.rfid}}",ng-click="delCat($event)")
+                    span.glyphicon.glyphicon-minus
+              tr
+                td(width="100px")
+                  form(name="flapName" novalidate)
+                    input.input-xs.form-control(type="text",id="fname",name="fname",width="160px",placeholder="Enter your flap name",ng-model="vm.flap",ng-maxlength="15",ng-pattern="/[A-Za-z]/",required)
+                    .alert.alert-custom-danger.alert-xs(ng-show="catName.cname.$invalid && catName.cname.$touched")
+                      span.glyphicon.glyphicon-exclamation-sign Flap name is required!
+                td
+                  form(name="flapID" novalidate)
+                    input.input-xs.form-control(type="text",id="fid",name="fid",placeholder="Enter flap ID",ng-model="vm.fid",ng-maxlength="10",ng-minlength="10",ng-pattern="/[A-Z0-9]/",required)
+                    .alert.alert-custom-danger.alert-xs(ng-show="catID.crfid.$invalid && catID.crfid.$touched")
+                      span.glyphicon.glyphicon-exclamation-sign 10-digit flap ID is required!
+                td
+                td
+                td
+                td
+                td
+                  button.btn.btn-xs.btn-custom(type="submit",ng-click="addflap()",ng-disabled="flapName.$invalid || flapID.$invalid")
+                    span.glyphicon.glyphicon-plus
+      uib-tab(index="1",heading="Cat",ng-click="hideButton()")
+        pre
+          table.table.table-hover.table-striped.table-condensed
+            thead
+              tr
+                th Cat
+                th RFID
+                th Recent Access
+                th Edit
+            tbody
+              tr(ng-repeat="x in cats")
+                td {{x.name}}
+                td {{x.rfid}}
+                td flap
+                td
+                  button.btn.btn-xs.btn-custom(rid="{{x.rfid}}",ng-click="delCat($event)")
+                    span.glyphicon.glyphicon-minus
+              tr
+                td(width="180px")
+                  form(name="catName" novalidate)
+                    input.input-xs.form-control(type="text",id="cname",name="cname",width="160px",placeholder="Enter your cat name",ng-model="vm.cat",ng-maxlength="15",ng-pattern="/[A-Za-z]/",required)
+                    .alert.alert-custom-danger.alert-xs(ng-show="catName.cname.$invalid && catName.cname.$touched")
+                      span.glyphicon.glyphicon-exclamation-sign Cat name is required!
+                td
+                  form(name="catID" novalidate)
+                    input.input-xs.form-control(type="text",id="crfid",name="crfid",placeholder="Enter 10-digit RFID",ng-model="vm.rfid",ng-maxlength="10",ng-minlength="10",ng-pattern="/[A-Z0-9]/",required)
+                    .alert.alert-custom-danger.alert-xs(ng-show="catID.crfid.$invalid && catID.crfid.$touched")
+                      span.glyphicon.glyphicon-exclamation-sign 10-digit RFID is required!
+                td
+                td
+                  button.btn.btn-xs.btn-custom(type="submit",ng-click="addCat()",ng-disabled="catName.$invalid || catID.$invalid")
+                    span.glyphicon.glyphicon-plus
+.container(style="height:120px")

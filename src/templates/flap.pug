@@ -1,0 +1,24 @@
+.row
+  .col-lg-12
+    h1.page-header Flaps
+      small   edit your flap
+    ol.breadcrumb
+      li
+        a(href='') Home
+      li.active flap
+.container.full-size
+  .row
+    table.table.table-hover.table-striped.table-condensed
+      thead
+        tr
+          th(width="50px")
+          th Cats
+          th RFID
+      tbody
+        tr(ng-repeat="x in cats")
+          td
+            input.pull-right(type="checkbox",name="{{x.name}}",id="{{x.rfid}}",ng-checked="isChecked(x.rfid)",ng-click="updateCat($event, x.rfid)")
+          td {{x.name}}
+          td {{x.rfid}}
+    a.btn.btn-custom(href="/#!/user") Save
+.container(style="height:50px")

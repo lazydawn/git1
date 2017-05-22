@@ -1,0 +1,28 @@
+.navbar.navbar-inverse.navbar-fixed-top.navbar-custom(ng-controller="headerController")
+  .container
+    .navbar-header
+      button.navbar-toggle(type="button" ng-click="isNavCollapsed=!isNavCollapsed")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='/')   Cat Flap
+    .collapse.navbar-collapse(uib-collapse="isNavCollapsed")
+      ul.nav.navbar-nav
+        li(ng-class="{ active: isActive('/home')}")
+          a(href='/#!/home') Home
+        li(ng-class="{ active: isActive('/download')}")
+          a(href='/#!/download') Download
+      ul.nav.navbar-nav.navbar-right(ng-show="isSignin")
+        li(ng-class="{ active: isActive('/user')}")
+          a(href='/#!/user')
+            span.glyphicon.glyphicon-user   Li Ming
+        li(ng-class="{ active: isActive('/signout')}")
+          a(ng-click="signout()")
+            span.glyphicon.glyphicon-log-out   Sign Out
+      ul.nav.navbar-nav.navbar-right(ng-hide="isSignin")
+        li(ng-class="{ active: isActive('/signup')}")
+          a(href='/#!/signup')
+            span.glyphicon.glyphicon-user   Sign Up
+        li(ng-class="{ active: isActive('/signin')}")
+          a(href='/#!/signin')
+            span.glyphicon.glyphicon-log-in   Sign in

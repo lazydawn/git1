@@ -1,0 +1,56 @@
+.row
+  .col-lg-12
+    h1.page-header Sign up
+      small   It's free
+    ol.breadcrumb
+      li
+        a(href='') Home
+      li.active signup
+.row(ng-show="isWrongInput")
+  .alert.alert-danger(role="alert")
+    span.glyphicon.glyphicon-exclamation-sign
+    .
+        Email exists
+.row
+  .col-sm-6
+    form(name="signupForm" novalidate)
+      .form-group(ng-class="{ 'has-error' : signupForm.first_name.$invalid && signupForm.first_name.$touched }")
+        label First name
+        input.form-control(type="text" name="first_name" placeholder='first name' ng-model="vm.first_name" required tabindex="1")
+        p.help-block(ng-show="signupForm.first_name.$invalid && signupForm.first_name.$touched") First name is required
+      .form-group(ng-class="{ 'has-error' : signupForm.last_name.$invalid && signupForm.last_name.$touched }")
+        label Last name
+        input.form-control(type="text" name="last_name" placeholder='last name' ng-model="vm.last_name" required tabindex="2")
+        p.help-block(ng-show="signupForm.last_name.$invalid && signupForm.last_name.$touched") Last name is required
+      .form-group(ng-class="{ 'has-error' : signupForm.email.$invalid && signupForm.email.$touched }")
+        label Email
+        input.form-control(type="email" name="email" placeholder='Email' class="form-control" ng-model="vm.email" required tabindex="3")
+        p.help-block(ng-show="signupForm.email.$invalid && signupForm.email.$touched") Email is required
+      .form-group(ng-class="{ 'has-error' : signupForm.password.$invalid && signupForm.password.$touched }")
+        label Password
+        input.form-control(type="password" name="password" placeholder='Password' ng-model="vm.password" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[1-9])/" required tabindex="4")
+        p.help-block(ng-show="signupForm.password.$invalid && signupForm.password.$touched") Passwords must be between 8 and 20 characters with one lowercase letter, uppercase letter and number.
+      .form-group(ng-class="{ 'has-error' : signupForm.confirm_password.$invalid && signupForm.confirm_password.$touched }")
+        label Confirm password
+        input.form-control(type="password" name="confirm_password" placeholder='confirm password' ng-model="vm.confirm_password" required password-verify="vm.password" tabindex="5")
+        p.help-block(ng-show="signupForm.confirm_password.$invalid && signupForm.confirm_password.$touched") Passwords do not match
+      div
+        button.btn.btn-custom.pull-right(type="submit" ng-click="vm.signup()" ng-disabled="signupForm.$invalid")
+          strong Sign up
+        .icheckbox
+          input(type='checkbox')
+          span  Remember me
+  .col-sm-6
+    label Connect with other websites
+    a.btn.btn-block.btn-social.btn-twitter
+      span.fa.fa-twitter
+      .
+        Sign up with Twitter
+    a.btn.btn-block.btn-social.btn-facebook
+      span.fa.fa-facebook
+      .
+        Sign up with Faceboom
+    a.btn.btn-block.btn-social.btn-google
+      span.fa.fa-google
+      .
+        Sign up with Google

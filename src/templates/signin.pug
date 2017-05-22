@@ -1,0 +1,44 @@
+.row
+  .col-lg-12
+    h1.page-header Signin
+      small   with email
+    ol.breadcrumb
+      li
+        a(href='') Home
+      li.active signin
+.row(ng-show="isWrongInput")
+  .alert.alert-danger(role="alert")
+    span.glyphicon.glyphicon-exclamation-sign
+    .
+        Wrong email or password!
+.row
+  .col-sm-6
+    form(name="signinForm" novalidate)
+      .form-group(ng-class="{ 'has-error' : signinForm.email.$invalid && signinForm.email.$touched }")
+        label Email
+        input(type="email" name="email" placeholder='Email' class="form-control" ng-model="vm.email" required)
+        p.help-block(ng-show="signinForm.email.$invalid && signinForm.email.$touched") Email is required
+      .form-group(ng-class="{ 'has-error' : signinForm.password.$invalid && signinForm.password.$touched }")
+        label Password
+        input.form-control(type="password" name="password" placeholder='Password' ng-model="vm.password" required )
+        p.help-block(ng-show="signinForm.password.$invalid && signinForm.password.$touched") Password is required
+      div
+        button.btn.btn-custom.pull-right(type="submit" ng-click="vm.signin()" ng-disabled="signinForm.$invalid")
+          strong Sign in
+        .icheckbox
+          input(type='checkbox')
+          span  Remember me
+  .col-sm-6
+    label Connect with other websites
+    a.btn.btn-block.btn-social.btn-twitter
+      span.fa.fa-twitter
+      .
+        Sign in with Twitter
+    a.btn.btn-block.btn-social.btn-facebook
+      span.fa.fa-facebook
+      .
+        Sign in with Facebook
+    a.btn.btn-block.btn-social.btn-google
+      span.fa.fa-google
+      .
+        Sign in with Google
